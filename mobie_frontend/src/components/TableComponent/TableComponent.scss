@@ -1,0 +1,43 @@
+.delete-all-button {
+  display: inline-block;
+  padding: 6px 16px;
+  background-color: #ff4d4f; 
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  transition: all 0.3s;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d9363e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    background-color: #ad2b31;
+  }
+}
+.download-table-xls-button {
+  background-color: #28a745; 
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #218838; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    background-color: #1e7e34;
+  }
+}

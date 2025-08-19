@@ -1,0 +1,47 @@
+html, body, #root {
+  height: 100%;
+  background-color: #efefef;
+  margin: 0;
+}
+.type_product_page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding-left: 20px;
+  background-color: #efefef;
+  border-radius: 8px;
+  min-height: 100vh;
+  
+ 
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.ant-col-4 {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.ant-pagination {
+  padding: 20px 0;
+}
+.ant-col-4 {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+
+  position: sticky;
+  top: 10px;  
+  height: fit-content;
+  align-self: flex-start; 
+}

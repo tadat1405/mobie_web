@@ -1,0 +1,126 @@
+.card-image {
+  width: 100%;
+  height: 385px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+.product-info {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Cách đều các phần tử
+
+  .rating-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .name_product {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .price_product {
+    font-size: 24px;
+    color: #e53935;
+    font-weight: 600;
+
+    span {
+      margin-right: 4px;
+    }
+  }
+
+  .address {
+    font-size: 14px;
+    color: #333;
+
+    .address_product {
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    .change_address {
+      color: #1890ff;
+      margin-left: 4px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .quantity {
+    font-size: 14px;
+    color: #333;
+
+    .quantity_product {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+
+      input {
+        width: 50px;
+        text-align: center;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .btn {
+    display: flex;
+    gap: 12px;
+
+    .btn-buy {
+      padding: 10px 24px;
+      font-weight: 500;
+      font-size: 16px;
+      border-radius: 6px;
+
+      &.pay {
+        background-color: #ff4d4f;
+        color: white;
+        border: none;
+
+        &:hover {
+          background-color: #d9363e;
+        }
+      }
+
+      &.later {
+        background-color: #fff;
+        color: #ff4d4f;
+        border: 1px solid #ff4d4f;
+
+        &:hover {
+          background-color: #fff0f0;
+        }
+      }
+    }
+  }
+}
+.quantity_product input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.quantity_product input::-webkit-outer-spin-button,
+.quantity_product input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari */
+  margin: 0;
+}
+

@@ -1,0 +1,33 @@
+.type_product{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    border-bottom: 1px solid red;
+    height: 44px;
+}
+.watch_more {
+  width: 250px;
+  height: 40px;
+  background-color: white;
+  color: #007bff;
+  border: 1px solid #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px;
+  margin-top: 10px;
+
+  span {
+    display: inline-block;
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: #007bff;
+    color: white;
+  }
+}

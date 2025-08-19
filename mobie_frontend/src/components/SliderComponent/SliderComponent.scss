@@ -1,0 +1,36 @@
+.slider-wrapper {
+  position: relative;
+
+  .slick-slider {
+    position: relative;
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 10px; // Sát dưới ảnh
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .slick-prev,
+  .slick-next {
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+  }
+
+  .slick-prev {
+    left: 10px; // Nằm ngoài cùng bên trái
+  }
+
+  .slick-next {
+    right: 10px; // Nằm ngoài cùng bên phải
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 30px;
+    color: white; // Màu mũi tên
+  }
+}

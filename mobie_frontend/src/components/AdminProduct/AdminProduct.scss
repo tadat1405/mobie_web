@@ -1,0 +1,59 @@
+.admin-user {
+  padding: 24px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #333;
+  }
+
+  &__actions {
+    margin-bottom: 16px;
+    text-align: right;
+  }
+
+  &__add-button {
+    background-color: #1890ff;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #40a9ff;
+      color: #fff;
+    }
+  }
+
+  &__table {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+}
+.action {
+  display: flex;
+  gap: 15px;
+
+  .delete,
+  .edit {
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .delete {
+    color: #ff4d4f; // đỏ
+  }
+
+  .edit {
+    color: #16e142; // xanh dương
+  }
+}

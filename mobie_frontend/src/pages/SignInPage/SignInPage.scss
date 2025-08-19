@@ -1,0 +1,57 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.53);
+    height: 100vh;
+    .form-login{
+        width: 800px;
+        height: 500px;
+        background: #fff;
+        border-radius: 10px;
+        display: flex;
+        overflow: hidden;
+        .left{
+            flex: 6;
+            padding: 0 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .btn{
+                display: contents;
+                .btn-login{
+                    width: 100%;
+                    height: 45px;
+                    background-color: red;
+                    font-weight: 500;
+                    color: white;
+                    letter-spacing: 1px;
+                }
+                &:focus{
+                    border: none;
+                }
+            }
+            .forgot_password{
+                cursor: pointer;
+            }
+        }
+        .right{
+            flex: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: rgb(222, 235, 255);
+            gap: 5px;
+            .image_login{
+                width: 200px;
+                height: 200px;
+            }
+        }
+    }
+}
+
+
+
+
+

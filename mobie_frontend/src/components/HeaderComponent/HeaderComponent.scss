@@ -1,0 +1,9 @@
+.pop{
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 2px 5px;
+    &:hover{
+        background: rgb(26, 148, 255);
+        color: #fff;
+    }
+}

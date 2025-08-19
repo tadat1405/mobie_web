@@ -1,0 +1,7 @@
+.home{
+    cursor: pointer;
+    &:hover{
+        text-decoration: underline;
+        color: #4cbade;
+    }
+}
