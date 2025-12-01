@@ -5,11 +5,11 @@ const { authMiddleware, authUserMiddleware } = require('../middleware/authMiddle
 
 
 
-router.post('/create/:id', authUserMiddleware,OrderController.createOrder);
-router.get('/get-all-order/:id',authUserMiddleware,OrderController.getAllOrderDetails);
-router.get('/get-details-order/:id',authUserMiddleware,OrderController.getDetailsOrder);
-router.delete('/cancel-order/:id',authUserMiddleware,OrderController.cancelOrderDetails);
-router.get('/get-all-order',authMiddleware,OrderController.getAllOrder);
+router.post('/create/:id',OrderController.createOrder);
+router.get('/get-all-order/:id',OrderController.getAllOrderDetails);
+router.get('/get-details-order/:id',OrderController.getDetailsOrder);
+router.delete('/cancel-order/:id',OrderController.cancelOrderDetails);
+router.get('/get-all-order',OrderController.getAllOrder);
 module.exports = router
 
 

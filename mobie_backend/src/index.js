@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 const routes = require('./routes');
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
