@@ -1,0 +1,14 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          cd ~/mobie_web
+          git pull origin master
+          docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
