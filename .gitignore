@@ -1,0 +1,36 @@
+# Thư viện và build
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+*.tsbuildinfo
+
+# Biến môi trường và bí mật (chỉ giữ file mẫu)
+.env
+.env.*
+!.env.example
+!.env.prod.example
+*.pem
+*.key
+
+# Log
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Dữ liệu sao lưu
+backups/
+*.dump
+*.archive
+
+# Hệ điều hành và editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Công cụ cục bộ
+.claude/
