@@ -1,5 +1,5 @@
 import { Col, Divider, Row, Button, Form, Input,Radio, Space } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import './OrderSuccess.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import ModalComponent from '../../components/ModalComponent/ModalComponent'
@@ -9,6 +9,7 @@ import Loading from '../../components/LoadingComponent/Loading'
 import { useLocation } from 'react-router-dom'
 import { orderContant } from '../../contant'
 import { converPeice } from '../../../utils'
+import { trackEcommerce, toTrackItem } from '../../utils/tracking'
 
 
 const OrderSuccess = () => {
@@ -18,6 +19,21 @@ const OrderSuccess = () => {
   const location = useLocation();
   const {state} = location;
   console.log('location', location)
+
+  // purchase: chỉ gửi một lần cho mỗi đơn (F5 trang cảm ơn không nhân đôi doanh thu)
+  useEffect(() => {
+    if (!state?.orderId || !state?.orders?.length) return
+    const once = `ht_purchase_${state.orderId}`
+    if (sessionStorage.getItem(once)) return
+    sessionStorage.setItem(once, '1')
+    trackEcommerce('purchase', {
+      transaction_id: state.orderId,
+      currency: 'VND',
+      value: state.totalPriceMemo,
+      shipping: state.shippingFee,
+      items: state.orders.map((line) => toTrackItem(line)),
+    })
+  }, [state])
   return (
     <div style={{ background: '#f5f5fa', padding: '10px 120px' }}>
       <Loading  isPending={false}>

@@ -14,6 +14,7 @@ import { updateUser } from '../../redux/slice/userSlide'
 import { useNavigate } from 'react-router-dom'
 import { removeAllOrderProduct } from '../../redux/slice/orderSlide'
 import { PayPalButton } from 'react-paypal-button-v2'
+import { trackEcommerce, toTrackItem } from '../../utils/tracking'
 
 const PaymentPage = () => {
   const dispatch = useDispatch()
@@ -52,6 +53,16 @@ const PaymentPage = () => {
   const totalPrice = useMemo(() => {
     return priceMemo - discountMemo + deliveryMemo
   }, [priceMemo, discountMemo, deliveryMemo])
+
+  // begin_checkout: khi vào trang thanh toán với giỏ có hàng
+  useEffect(() => {
+    if (!orderItems?.length) return
+    trackEcommerce('begin_checkout', {
+      currency: 'VND',
+      value: totalPrice,
+      items: orderItems.map((line) => toTrackItem(line)),
+    })
+  }, [orderItems, totalPrice])
 
   useEffect(() => {
     if (isModalOpenUpdateInfor) {
@@ -93,6 +104,9 @@ const PaymentPage = () => {
             dispatch(removeAllOrderProduct({listChecked:arrayOrder}))
             navigate('/orderSuccess', {
               state: {
+                // Backend chưa trả về id đơn, nên tạo mã đơn phía client để chống đếm trùng khi F5
+                orderId: `${user?.id}-${Date.now()}`,
+                shippingFee: deliveryMemo,
                 deliveryMethod,
                 payment,
                 orders: order?.orderItemsSelected,

@@ -34,3 +34,6 @@ Thumbs.db
 
 # Công cụ cục bộ
 .claude/
+
+# thông tin đăng nhập DB, không commit
+mobie_pass.txt

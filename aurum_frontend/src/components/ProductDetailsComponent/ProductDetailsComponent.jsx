@@ -1,5 +1,5 @@
 import { Rate } from 'antd'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MinusOutlined, PlusOutlined, ShoppingCartOutlined, ThunderboltOutlined, CheckCircleFilled } from '@ant-design/icons';
 import * as ProductService from '../../services/ProductService';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { addOrderProduct } from '../../redux/slice/orderSlide';
 import { converPeice } from '../../../utils';
 import { toast } from 'react-toastify';
+import { trackEcommerce, toTrackItem } from '../../utils/tracking';
 import RelatedProducts from '../RelatedProducts/RelatedProducts';
 
 const Section = ({ title, children }) => (
@@ -40,6 +41,16 @@ const ProductDetailsComponent = ({idProduct}) => {
         enabled: !!idProduct
     });
 
+    // Sự kiện view_item: khi đã có dữ liệu sản phẩm
+    useEffect(() => {
+        if (!productsDetails?._id) return
+        trackEcommerce('view_item', {
+            currency: 'VND',
+            value: productsDetails.price,
+            items: [toTrackItem(productsDetails, 1)],
+        })
+    }, [productsDetails?._id, productsDetails?.name, productsDetails?.category, productsDetails?.price])
+
     const maxStock = productsDetails?.countInStock || 1
     const handleChangCount = (type) => {
         setNumProduct((prev) => type === 'decrease' ? Math.max(1, prev - 1) : Math.min(maxStock, prev + 1));
@@ -57,9 +68,15 @@ const ProductDetailsComponent = ({idProduct}) => {
                 image: productsDetails?.image,
                 price: productsDetails?.price,
                 product: productsDetails?._id,
-                discount: productsDetails?.discount
+                discount: productsDetails?.discount,
+                category: productsDetails?.category
             }
         }))
+        trackEcommerce('add_to_cart', {
+            currency: 'VND',
+            value: productsDetails?.price * numProduct,
+            items: [toTrackItem(productsDetails, numProduct)],
+        })
         return true
     }
     const handleAddToCart = ()=>{ if(addToCart()) toast.success('Đã thêm vào giỏ hàng') }
