@@ -16,6 +16,7 @@ services:
       retries: 5
 
   backend:
+    image: ghcr.io/tadat1405/aurum-backend:${IMAGE_TAG:-latest}
     build: ./aurum_backend
     restart: unless-stopped
     depends_on:
@@ -31,6 +32,7 @@ services:
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost}
 
   frontend:
+    image: ghcr.io/tadat1405/aurum-frontend:${IMAGE_TAG:-latest}
     build: ./aurum_frontend
     restart: unless-stopped
     depends_on:

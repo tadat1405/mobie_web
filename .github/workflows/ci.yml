@@ -1,8 +1,9 @@
 name: CI
 
+# Chạy trên develop và pull request. Nhánh master do workflow "Release and Deploy" lo.
 on:
   push:
-    branches: [develop, master]
+    branches: [develop]
   pull_request:
     branches: [master]
 
