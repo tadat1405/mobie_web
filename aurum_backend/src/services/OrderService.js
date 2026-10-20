@@ -1,5 +1,6 @@
 const Order = require("../models/OrderProduct");
 const Product = require("../models/ProductModel");
+const { catalog } = require("../ht");
 
 const createOrder = async (newOder) => {
     const {orderItems,paymentMethod, itemsPrice, shippingPrice, totalPrice, fullName, address, city, phone, user, isPaid, paidAt} = newOder;
@@ -17,6 +18,7 @@ const createOrder = async (newOder) => {
         )
         console.log('prodcutdata', productData)
         if(productData){
+            catalog.upsert(productData)
             const createOrder = await Order.create({
                 orderItems,
                 shippingAddress: {

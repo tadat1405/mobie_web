@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 const routes = require('./routes');
+const { catalog } = require('./ht');
+const Product = require('./models/ProductModel');
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -34,6 +36,7 @@ routes(app);
 mongoose.connect(`${process.env.MONGO_DB}`)
 .then(()=>{
     console.log("Connect DB success!")
+    Product.find().lean().then((all) => catalog.reindex(all)).catch(console.log)
 })
 .catch((err)=>{
     console.log("Eroor: ",err);
@@ -42,3 +45,10 @@ mongoose.connect(`${process.env.MONGO_DB}`)
 app.listen(port, ()=>{
     console.log("service is running in port: ", "http://localhost:"+port);
 });
+
+for (const signal of ['SIGTERM', 'SIGINT']) {
+    process.on(signal, async () => {
+        await catalog.close()
+        process.exit(0)
+    })
+}
