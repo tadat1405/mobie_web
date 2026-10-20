@@ -1,4 +1,5 @@
 const Product = require("../models/ProductModel");
+const { catalog } = require("../ht");
 
 const createProduct = async (product) => {
     const {name, image, type, price, countInStock, rating,discount, description} = product;
@@ -21,6 +22,7 @@ const createProduct = async (product) => {
             description: description
         })
         if(createProduct){
+            catalog.upsert(createProduct)
             return ({
                 status: 'OK', 
                 message: 'Create product success',
@@ -44,6 +46,9 @@ const updateProduct = async (id,data) => {
             })
         }
         const updateProduct = await Product.findByIdAndUpdate (id, data, {new: true});
+        if(updateProduct){
+            catalog.upsert(updateProduct)
+        }
         return ({
             status: 'OK', 
             message: 'Update succes',
@@ -85,6 +90,7 @@ const deleteProduct = async (id) => {
             })
         }
        const deletedProduct =  await Product.findByIdAndDelete(id);
+       catalog.remove(String(id))
         return ({
             status: 'OK', 
             message: 'Delete Success',
@@ -106,6 +112,7 @@ const deleteManyProduct = async (ids) => {
         //     })
         // }
        const deletedProduct =  await Product.deleteMany({_id: ids});
+       ;[].concat(ids).forEach((id) => catalog.remove(String(id)))
         return ({
             status: 'OK', 
             message: 'Delete Success',

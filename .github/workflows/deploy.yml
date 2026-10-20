@@ -60,6 +60,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Pull and start new version
+        env:
+          HT_WRITE_KEY: ${{ secrets.HT_WRITE_KEY }}
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           docker compose -p mobie_web -f docker-compose.prod.yml --env-file "$ENV_FILE" pull
