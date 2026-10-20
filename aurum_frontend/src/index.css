@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+@theme {
+  --font-serif: "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #fff4f4;
+  --color-brand-100: #fde3e5;
+  --color-brand-500: #f08f97;
+  --color-brand-600: #e8707a;
+  --color-brand-700: #d4545f;
+  --color-brand-900: #3b2a2d;
+}
+
+html { font-size: 15px; }
+body { margin: 0; font-family: var(--font-sans); background: #fff; color: #1f2937; }
+
+/* slick dots / arrows */
+.slick-dots { bottom: 14px; }
+.slick-dots li button:before { color: #fff; opacity: .6; font-size: 10px; }
+.slick-dots li.slick-active button:before { color: #fff; opacity: 1; }
+.slick-prev, .slick-next { z-index: 5; width: 40px; height: 40px; }
+.slick-prev { left: 14px; } .slick-next { right: 14px; }
+.slick-prev:before, .slick-next:before { font-size: 40px; text-shadow: 0 1px 6px rgba(0,0,0,.4); }
+
+
+/* antd reset đặt màu cho thẻ a (không nằm trong layer) nên cần ghi đè ở đây */
+.site-nav a { color: #334155; }
+.site-nav a:hover, .site-nav a.active { color: var(--color-brand-600); }
