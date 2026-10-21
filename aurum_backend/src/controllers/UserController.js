@@ -2,6 +2,8 @@ const UserService = require('../services/UserService');
 const JwtService = require('../services/JwtService');
 
 const isProd = process.env.NODE_ENV === 'production';
+// Cookie secure chỉ hoạt động qua HTTPS. Đặt COOKIE_SECURE=false khi chạy HTTP trong mạng nội bộ.
+const cookieSecure = process.env.COOKIE_SECURE ? process.env.COOKIE_SECURE === 'true' : isProd;
 // sign-up
 const createUser = async(req,res)=>{
     try {
@@ -64,8 +66,8 @@ const loginUser = async(req,res)=>{
         const {refesh_token, ...newRespone} = response;
         res.cookie('refesh_token',refesh_token,{
             httpOnly: true,
-            secure: isProd,
-            sameSite: isProd ? 'none' : 'lax',
+            secure: cookieSecure,
+            sameSite: cookieSecure ? 'none' : 'lax',
             maxAge: 365 * 24 * 60 * 60 * 1000,
         })
         return res.status(200).json(newRespone);
@@ -182,7 +184,7 @@ const refreshToken = async (req,res) => {
 };
 const logOutUser = async (req,res)=>{
     try {
-        res.clearCookie('refesh_token', { httpOnly: true, secure: isProd, sameSite: isProd ? 'none' : 'lax' });
+        res.clearCookie('refesh_token', { httpOnly: true, secure: cookieSecure, sameSite: cookieSecure ? 'none' : 'lax' });
          return res.status(200).json({
                 status: "OK",
                 message: 'Logout successfully'

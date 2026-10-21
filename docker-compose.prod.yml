@@ -30,6 +30,7 @@ services:
       REFRESH_TOKEN: ${REFRESH_TOKEN}
       CLINE_ID: ${CLINE_ID:-}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost}
+      COOKIE_SECURE: ${COOKIE_SECURE:-}
       HT_WRITE_KEY: ${HT_WRITE_KEY:-}
 
   frontend:
