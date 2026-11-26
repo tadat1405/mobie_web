@@ -1,26 +1,43 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import * as ProductService from '../../services/ProductService'
+import * as RecommendService from '../../services/RecommendService'
 import CardComponent from '../CardComponent/CardComponent'
 
-// Gợi ý: cùng loại, ưu tiên cùng thương hiệu và giá gần nhất với sản phẩm đang xem
 const RelatedProducts = ({ product, limit = 5 }) => {
+    const recommendEnabled = RecommendService.isRecommendEnabled()
+
+    const ht = useQuery({
+        queryKey: ['ht-similar', product?._id, limit],
+        queryFn: () => RecommendService.getSimilarProducts(product._id, limit),
+        enabled: recommendEnabled && !!product?._id,
+        staleTime: 60 * 1000,
+        retry: false,
+    })
+
+    const fromHT = (ht.data?.items || []).map((item) => ({ ...item.data, _id: item.data?._id || item.id }))
+    const useFallback = !recommendEnabled || ht.isError || (ht.isSuccess && fromHT.length === 0)
+
     const { data } = useQuery({
         queryKey: ['related-source', product?.type],
         queryFn: () => ProductService.getProductType(product.type, 0, 1000),
-        enabled: !!product?.type,
+        enabled: !!product?.type && useFallback,
         staleTime: 5 * 60 * 1000,
     })
 
-    const related = (data?.data || [])
-        .filter((p) => p._id !== product?._id)
-        .map((p) => ({
-            p,
-            score: (p.brand && p.brand === product?.brand ? 0 : 1e9) + Math.abs(p.price - product?.price),
-        }))
-        .sort((a, b) => a.score - b.score)
-        .slice(0, limit)
-        .map((x) => x.p)
+    const fromLocal = useFallback
+        ? (data?.data || [])
+            .filter((p) => p._id !== product?._id)
+            .map((p) => ({
+                p,
+                score: (p.brand && p.brand === product?.brand ? 0 : 1e9) + Math.abs(p.price - product?.price),
+            }))
+            .sort((a, b) => a.score - b.score)
+            .slice(0, limit)
+            .map((x) => x.p)
+        : []
+
+    const related = fromHT.length ? fromHT : fromLocal
 
     if (!related.length) return null
 

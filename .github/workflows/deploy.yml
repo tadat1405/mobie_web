@@ -40,6 +40,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: aurum_frontend
+          build-args: |
+            VITE_HT_URL=https://hta-admin.giavanghomnay.cloud
+            VITE_HT_COUNTER_ID=298381759
           push: true
           tags: |
             ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
